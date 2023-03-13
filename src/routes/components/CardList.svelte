@@ -115,7 +115,7 @@
  {/if}
 
  <!-- if the user has scrolled to the end and there are no more results to fetch, they see this message -->
-  {#if !hasMore}
+  {#if !hasMore && loading === false}
   <div class='viewingAllContainer'>
     <div class="viewingAll">Viewing All Results</div>
   </div>
