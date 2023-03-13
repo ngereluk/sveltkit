@@ -9,7 +9,7 @@
         
  <div class='listCardContainerPadding'> 
     <!-- card wrapped in clickable link that goes to card details -->
-    <a class="overrideElStyles" data-sveltekit-reload href="/cardDetails/{cardId}">   
+    <a class="overrideElStyles" data-sveltekit-reload href="/cards/{cardId}">   
     <div class='listCardContainer'> 
         <!-- card image -->
         <div class='listCardImageContainer'>
