@@ -32,8 +32,7 @@
         })
 
       const newCards:CardType[] = await res.json()
-      //there are two cases for this request - we are loading more results on scroll or we are loading a new set of results from scratch
-      if(searchString === lastQueryText){ //if the search string hasnt changed, we know we are loading more cards to an existing request
+      if(searchString === lastQueryText){ //if the search string hasnt changed, we know we are loading more cards to an existing request/page loads first time
         cards = [
           ...cards,
           ...newCards
@@ -115,14 +114,14 @@
  {/if}
 
  <!-- if the user has scrolled to the end and there are no more results to fetch, they see this message -->
-  {#if !hasMore && loading === false}
+  {#if !hasMore && loading === false && fetchError===false}
   <div class='viewingAllContainer'>
     <div class="viewingAll">Viewing All Results</div>
   </div>
   {/if}
 
   <!-- if there was an error when getting cards from api, user is shown this message -->
-  {#if fetchError}
+  {#if fetchError && loading === false }
   <div class='errorContainer'>
     <div class="error">Sorry, we couldn't retieve any data. Please try another search term or try refreshing the page.</div>
   </div>
