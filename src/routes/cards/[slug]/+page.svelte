@@ -10,22 +10,50 @@
    export let data:CardType
    let loading = true //will hide/show loading animation
 
-   onMount(async()=>{//get details for the card id (obtained from the page params slug)
-    console.log('loading ',loading)
+   onMount(async()=>{
+    //artificially skip the reuqest to show pre pop card for demo purposes
     loading = true
-    const res =  await fetch("/api/GetCardDetails", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-            cardId: $page.params.slug
-        }),
-      });
-      const response = await res.json()
-      data = response as CardType
-      loading = false    
-    })
+    if($page.params.slug !== '5f8287b1-5bb6-5f4c-ad17-316a40d5bb0c'){
+      const res =  await fetch("/api/GetCardDetails", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",//specifies media type of ressource
+          },
+          body: JSON.stringify({
+              cardId: $page.params.slug//again, why stringify?
+          }),
+        });
+        const response = await res.json()
+        data = response as CardType
+        loading = false   
+    }
+    else{
+      loading = true
+      data= {
+        "name": "Ancestor's Chosen",
+        "manaCost": "{5}{W}{W}",
+        "cmc": 7,
+        "colors": ["W"],
+        "colorIdentity": ["W"],
+        "type": "Creature — Human Cleric",
+        "types": ["Creature"],
+        "subtypes": ["Human", "Cleric"],
+        "rarity": "Uncommon",
+        "set": "10E",
+        "setName": "Tenth Edition",
+        "text": "First strike (This creature deals combat damage before creatures without first strike.)\nWhen Ancestor's Chosen enters the battlefield, you gain 1 life for each card in your graveyard.",
+        "artist": "Pete Venters",
+        "number": "1",
+        "flavor": "The will of all, by my hand done.",
+        "layout": "normal",
+        "imageUrl": "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=130550&type=card",
+        "id": "5f8287b1-5bb6-5f4c-ad17-316a40d5bb0c"
+      }
+      loading = false   
+
+    }
+  })
+  
 
   </script>
  
